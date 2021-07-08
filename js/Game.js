@@ -8,8 +8,6 @@ class Game {
     this.leader1 = createElement("h2");
     this.leader2 = createElement("h2");
     this.playerMoving = false;
-    
-    
   }
 
   getState() {
@@ -34,20 +32,15 @@ class Game {
     car1 = createSprite(width / 2 - 50, height - 100);
     car1.addImage("car1", car1_img);
     car1.scale = 0.07;
-  
 
     car2 = createSprite(width / 2 + 100, height - 100);
     car2.addImage("car2", car2_img);
     car2.scale = 0.07;
-   
 
     cars = [car1, car2];
 
     fuels = new Group();
     powerCoins = new Group();
-    
-
-    
 
     //Multiple Obstacles are defined at various positions
     var obstaclesPositions = [
@@ -66,29 +59,24 @@ class Game {
     ];
 
     // Adding fuel sprite in the game
-    this.addSpirtes(fuels, 4, fuelImage, 0.02);
+    this.addSprites(fuels, 4, fuelImage, 0.02);
 
     // Adding coin sprite in the game
-    this.addSpirtes(powerCoins, 18, powerCoinImage, 0.09);
-
-  
- 
+    this.addSprites(powerCoins, 18, powerCoinImage, 0.09);
   }
 
-  
-  addSpirtes(spriteGroup, numberOfSprites, spirteImage, scale) {
+  addSprites(spriteGroup, numberOfSprites, spriteImage, scale) {
     for (var i = 0; i < numberOfSprites; i++) {
       var x, y;
 
-    
-        x = random(width / 2 + 150, width / 2 - 150);
-        y = random(-height * 4.5, height - 400);
-      
-      var spirte = createSprite(x, y);
-      spirte.addImage("spirte", spirteImage);
+      x = random(width / 2 + 150, width / 2 - 150);
+      y = random(-height * 4.5, height - 400);
 
-      spirte.scale = scale;
-      spriteGroup.add(spirte);
+      var sprite = createSprite(x, y);
+      sprite.addImage("sprite", spriteImage);
+
+      sprite.scale = scale;
+      spriteGroup.add(sprite);
     }
   }
 
@@ -129,9 +117,6 @@ class Game {
       this.showLife();
       this.showLeaderboard();
 
-      
-     
-
       //index of the array
       var index = 0;
       for (var plr in allPlayers) {
@@ -152,20 +137,17 @@ class Game {
 
           this.handleFuel(index);
           this.handlePowerCoins(index);
-         
 
-         // Changing camera position in y direction
+          // Changing camera position in y direction
           camera.position.y = cars[index - 1].position.y;
         }
       }
-     
+
       if (this.playerMoving) {
         player.positionY += 5;
         player.update();
-      
       }
 
-     
       // handling keyboard events
       this.handlePlayerControls();
 
@@ -292,25 +274,24 @@ class Game {
   }
 
   handlePlayerControls() {
-    
-      if (keyIsDown(UP_ARROW)) {
-        this.playerMoving = true;
-        player.positionY += 10;
-        player.update();
-      }
-
-      if (keyIsDown(LEFT_ARROW) && player.positionX > width / 3 - 50) {
-        this.leftKeyActive = true;
-        player.positionX -= 5;
-        player.update();
-      }
-
-      if (keyIsDown(RIGHT_ARROW) && player.positionX < width / 2 + 300) {
-        this.leftKeyActive = false;
-        player.positionX += 5;
-        player.update();
-      }
+    if (keyIsDown(UP_ARROW)) {
+      this.playerMoving = true;
+      player.positionY += 10;
+      player.update();
     }
+
+    if (keyIsDown(LEFT_ARROW) && player.positionX > width / 3 - 50) {
+      this.leftKeyActive = true;
+      player.positionX -= 5;
+      player.update();
+    }
+
+    if (keyIsDown(RIGHT_ARROW) && player.positionX < width / 2 + 300) {
+      this.leftKeyActive = false;
+      player.positionX += 5;
+      player.update();
+    }
+  }
 
   showRank() {
     swal({
@@ -333,5 +314,4 @@ class Game {
       confirmButtonText: "Thanks For Playing"
     });
   }
- 
 }
